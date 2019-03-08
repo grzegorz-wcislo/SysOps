@@ -1,0 +1,2 @@
+Zastosowanie różnych poziomów optymalizacji programu również nie ma wpływu na prędkość działania programu.
+Co ciekawe, kompilacja z flagą `-O0` tworzy najmniejsze pliki wykonywalne (ok 15% miejsze) niż flagi `-O1` i `-Os`.

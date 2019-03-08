@@ -1,0 +1,3 @@
+Najwięcej czasu zużywa wykonanie polecenia `find`.
+Czasy wykonania czynności przy użyciu bibliotek statycznych i współdzielonych są praktycznie identyczne.
+Alokacja i zwalnianie pamięci odbywa się w przeciągu czasu, który trudno zmierzyć z dużą dokładnością.

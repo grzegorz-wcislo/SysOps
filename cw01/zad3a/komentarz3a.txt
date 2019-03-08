@@ -1,0 +1,1 @@
+Podobnie jak w zadaniu 2., czas wykonania przy użyciu biblioteki ładowanej dynamicznie jest taki sam jak statycznej i współdzielonej.

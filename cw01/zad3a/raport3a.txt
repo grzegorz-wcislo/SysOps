@@ -1,0 +1,153 @@
+
+--------------------
+Static
+--------------------
+-- Big search --
+Finding
+  real    0.53s
+  user    0.00s
+  sys     0.00s
+Allocating
+  real    0.01s
+  user    0.00s
+  sys     0.00s
+Deleting
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+
+-- Medium search --
+Finding
+  real    0.27s
+  user    0.00s
+  sys     0.00s
+Allocating
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+Deleting
+  real    0.01s
+  user    0.00s
+  sys     0.00s
+
+-- Small search --
+Finding
+  real    0.16s
+  user    0.00s
+  sys     0.00s
+Allocating
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+Deleting
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+
+-- Alternating alocation and deletion --
+Alternating allocating and deleting
+  real    0.31s
+  user    0.09s
+  sys     0.20s
+
+--------------------
+Shared
+--------------------
+-- Big search --
+Finding
+  real    0.52s
+  user    0.00s
+  sys     0.00s
+Allocating
+  real    0.01s
+  user    0.00s
+  sys     0.00s
+Deleting
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+
+-- Medium search --
+Finding
+  real    0.27s
+  user    0.00s
+  sys     0.00s
+Allocating
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+Deleting
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+
+-- Small search --
+Finding
+  real    0.17s
+  user    0.00s
+  sys     0.00s
+Allocating
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+Deleting
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+
+-- Alternating alocation and deletion --
+Alternating allocating and deleting
+  real    0.31s
+  user    0.06s
+  sys     0.23s
+
+--------------------
+Dynamic
+--------------------
+-- Big search --
+Finding
+  real    0.52s
+  user    0.00s
+  sys     0.00s
+Allocating
+  real    0.01s
+  user    0.00s
+  sys     0.00s
+Deleting
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+
+-- Medium search --
+Finding
+  real    0.27s
+  user    0.00s
+  sys     0.00s
+Allocating
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+Deleting
+  real    0.01s
+  user    0.00s
+  sys     0.00s
+
+-- Small search --
+Finding
+  real    0.16s
+  user    0.00s
+  sys     0.00s
+Allocating
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+Deleting
+  real    0.00s
+  user    0.00s
+  sys     0.00s
+
+-- Alternating alocation and deletion --
+Alternating allocating and deleting
+  real    0.31s
+  user    0.08s
+  sys     0.21s
