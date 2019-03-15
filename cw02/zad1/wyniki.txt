@@ -1,0 +1,171 @@
+Dla małych rekowrów funkcje systemowe są wolniejsze, a dla większych
+wolniejsze od funkcji bibliotecznych.  Dzieje się tak prawdopodobnie
+dlatego, że podczas pisania do plików małych porcji danych są one
+buforowane i zapisywane w większych paczkach.
+
+Wiąże się to jednak z pewną stratą czasu na dodatkowe zarządzanie i
+podczas zapisywania jednocześnie dużych porcji danych (4000B+) funkcje
+biblioteczne są prawie 2x wolniejsze.
+
+Różnica jest widoczna w obydwu trybach jądra.
+
+ === 2000 Records === 
+
+== LIB == Copying 2000 records of size 1
+  user    0.00s
+  sys     0.00s
+== SYS == Copying 2000 records of size 1
+  user    0.00s
+  sys     0.02s
+== LIB == Sorting 2000 records of size 1
+  user    0.21s
+  sys     0.47s
+== SYS == Sorting 2000 records of size 1
+  user    0.38s
+  sys     1.10s
+
+== LIB == Copying 2000 records of size 4
+  user    0.00s
+  sys     0.00s
+== SYS == Copying 2000 records of size 4
+  user    0.00s
+  sys     0.00s
+== LIB == Sorting 2000 records of size 4
+  user    0.21s
+  sys     0.49s
+== SYS == Sorting 2000 records of size 4
+  user    0.35s
+  sys     1.15s
+
+== LIB == Copying 2000 records of size 512
+  user    0.00s
+  sys     0.00s
+== SYS == Copying 2000 records of size 512
+  user    0.00s
+  sys     0.00s
+== LIB == Sorting 2000 records of size 512
+  user    0.27s
+  sys     0.60s
+== SYS == Sorting 2000 records of size 512
+  user    0.40s
+  sys     1.13s
+
+== LIB == Copying 2000 records of size 1024
+  user    0.00s
+  sys     0.00s
+== SYS == Copying 2000 records of size 1024
+  user    0.00s
+  sys     0.00s
+== LIB == Sorting 2000 records of size 1024
+  user    0.35s
+  sys     0.71s
+== SYS == Sorting 2000 records of size 1024
+  user    0.34s
+  sys     1.19s
+
+== LIB == Copying 2000 records of size 4096
+  user    0.00s
+  sys     0.01s
+== SYS == Copying 2000 records of size 4096
+  user    0.00s
+  sys     0.01s
+== LIB == Sorting 2000 records of size 4096
+  user    0.49s
+  sys     1.71s
+== SYS == Sorting 2000 records of size 4096
+  user    0.41s
+  sys     1.24s
+
+== LIB == Copying 2000 records of size 8196
+  user    0.00s
+  sys     0.01s
+== SYS == Copying 2000 records of size 8196
+  user    0.00s
+  sys     0.02s
+== LIB == Sorting 2000 records of size 8196
+  user    0.46s
+  sys     1.79s
+== SYS == Sorting 2000 records of size 8196
+  user    0.37s
+  sys     1.20s
+
+ === 4000 Records === 
+
+== LIB == Copying 4000 records of size 1
+  user    0.00s
+  sys     0.00s
+== SYS == Copying 4000 records of size 1
+  user    0.00s
+  sys     0.01s
+== LIB == Sorting 4000 records of size 1
+  user    0.89s
+  sys     1.72s
+== SYS == Sorting 4000 records of size 1
+  user    1.49s
+  sys     4.31s
+
+== LIB == Copying 4000 records of size 4
+  user    0.00s
+  sys     0.00s
+== SYS == Copying 4000 records of size 4
+  user    0.00s
+  sys     0.00s
+== LIB == Sorting 4000 records of size 4
+  user    1.56s
+  sys     2.60s
+== SYS == Sorting 4000 records of size 4
+  user    1.60s
+  sys     4.61s
+
+== LIB == Copying 4000 records of size 512
+  user    0.00s
+  sys     0.00s
+== SYS == Copying 4000 records of size 512
+  user    0.00s
+  sys     0.01s
+== LIB == Sorting 4000 records of size 512
+  user    1.29s
+  sys     2.53s
+== SYS == Sorting 4000 records of size 512
+  user    1.82s
+  sys     6.23s
+
+== LIB == Copying 4000 records of size 1024
+  user    0.00s
+  sys     0.00s
+== SYS == Copying 4000 records of size 1024
+  user    0.00s
+  sys     0.01s
+== LIB == Sorting 4000 records of size 1024
+  user    1.30s
+  sys     3.00s
+== SYS == Sorting 4000 records of size 1024
+  user    1.54s
+  sys     5.04s
+
+== LIB == Copying 4000 records of size 4096
+  user    0.00s
+  sys     0.02s
+== SYS == Copying 4000 records of size 4096
+  user    0.00s
+  sys     0.02s
+== LIB == Sorting 4000 records of size 4096
+  user    2.08s
+  sys     7.96s
+== SYS == Sorting 4000 records of size 4096
+  user    2.06s
+  sys     8.76s
+
+== LIB == Copying 4000 records of size 8196
+  user    0.00s
+  sys     0.04s
+== SYS == Copying 4000 records of size 8196
+  user    0.00s
+  sys     0.04s
+== LIB == Sorting 4000 records of size 8196
+  user    1.75s
+  sys     7.32s
+== SYS == Sorting 4000 records of size 8196
+  user    1.44s
+  sys     4.69s
+
