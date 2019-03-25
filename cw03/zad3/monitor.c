@@ -36,6 +36,7 @@ int main(int argc, char* argv[]) {
 	if (m != 1 && m != 2) die("Unknown mode, choose 1 or 2");
 
 	char *list_buffer = read_file(listname);
+	if (!list_buffer) die("Could not read file");
 
 	char *file_name = malloc(255);
 	if (!file_name) die_errno();
@@ -91,15 +92,18 @@ char *read_file(char *file_name) {
 	if (lstat(file_name, &stat) != 0) die_errno();
 
 	FILE* file = fopen(file_name, "r");
-	if (!file) die_errno();
+	if (!file) return NULL;
 
 	char *filebuffer = malloc(stat.st_size + 1);
-	if (fread(filebuffer, 1, stat.st_size, file) != stat.st_size)
-		die("Could not read file");
+	if (!filebuffer || fread(filebuffer, 1, stat.st_size, file) != stat.st_size) {
+		free(filebuffer);
+		fclose(file);
+		return NULL;
+	}
 
 	filebuffer[stat.st_size] = '\0';
 
-	if (fclose(file)) die_errno();
+	fclose(file);
 
 	return filebuffer;
 }
@@ -143,7 +147,13 @@ void watch_1(char *file_name, int interval, int time) {
 	time_t last_mod = stat.st_mtime;
 
 	char *contents = read_file(file_name);
+	if (!contents) {
+		fprintf(stderr, "Could not read file\n");
+		exit(n);
+	}
+
 	char *file_name_date = malloc(strlen(file_name) + 30);
+	if (!file_name_date) exit(0);
 	strcpy(file_name_date, file_name);
 
 	while ((elapsed += interval) <= time) {
@@ -165,7 +175,10 @@ void watch_1(char *file_name, int interval, int time) {
 
 			free(contents);
 			contents = read_file(file_name);
-			if (!contents) die_errno();
+			if (!contents) {
+				fprintf(stderr, "Could not read file\n");
+				exit(n);
+			}
 
 			last_mod = stat.st_mtime;
 			n++;
