@@ -11,6 +11,8 @@
 
 #define MAX_CMDS 20
 #define MAX_ARGS 20
+#define MAX_LINE_LEN 2000
+#define MAX_LINES 20
 
 typedef struct {
 	char *name;
@@ -22,13 +24,16 @@ typedef struct {
 	size_t size;
 } cmds;
 
-char *read_file(char*);
+typedef struct {
+    char** list;
+    int length;
+} string_vec;
+
+string_vec read_file(char*);
 cmds parse_commands(char*);
 cmd parse_command(char*);
-void create_pipes(cmds);
 void spawn_children(cmds);
 
-void show_errno(void);
 void die_errno(void);
 void die(char*);
 
@@ -36,40 +41,42 @@ int main(int argc, char *argv[])
 {
 	if (argc != 2)
 		die("Pass a file name");
+	
+	string_vec command_strings = read_file(argv[1]);
+	for (int i = 0; i < command_strings.length; i++) {
+		cmds commands = parse_commands(command_strings.list[i]);
+		spawn_children(commands);
 
-	char *command_string = read_file(argv[1]);
-	cmds commands = parse_commands(command_string);
-	spawn_children(commands);
+		for (int i = 0; i < commands.size; i++)
+			wait(NULL);
 
-	for (int i = 0; i < commands.size; i++)
-		wait(NULL);
-
-	free(command_string);
+	}
 
 	return 0;
 }
 
-char *read_file(char *file_name)
+string_vec read_file(char *file_name)
 {
-	FILE* file = fopen(file_name, "r");
-	if (!file) die_errno();
+    FILE* file = fopen(file_name, "r");
+    if (!file) die_errno();
 
-	fseek(file, 0 , SEEK_END);
-	size_t file_size = ftell(file);
-	fseek(file, 0 , SEEK_SET);
+    char** list = calloc(MAX_LINES + 1, sizeof(char*));
+    char* buffer = calloc(MAX_LINE_LEN + 1, sizeof(char));
+    int line_count = 0;
+    while (fgets(buffer, MAX_LINE_LEN, file)) {
+        if(line_count == MAX_LINES + 1) die("Too many lines in file");
+        list[line_count] = calloc(strlen(buffer), sizeof(char));
+        strcpy(list[line_count++], buffer);
+    }
 
-	char *file_buffer = malloc(file_size + 1);
-	if (!file_buffer) die_errno();
+    string_vec result = {};
+    result.list = list;
+    result.length = line_count;
 
-	size_t chars_read = fread(file_buffer, 1, file_size, file);
+    if (fclose(file)) die_errno();
+    free(buffer);
 
-	if (chars_read != file_size)
-		die("Error reading file");
-
-	if (fclose(file) != 0)
-		die_errno();
-
-	return file_buffer;
+    return result;
 }
 
 cmds parse_commands(char *commands)
@@ -159,10 +166,6 @@ void spawn_children(cmds commands)
 	close(pipes[i % 2][1]);
 }
 
-void show_errno(void)
-{
-	fputs(strerror(errno), stderr);
-}
 
 void die_errno(void)
 {
