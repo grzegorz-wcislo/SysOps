@@ -1,0 +1,8 @@
+LIST
+ECHO foo
+ECHO bar
+LIST
+2ALL witam
+2ALL wysylam wiadomosci
+2ALL wszystko dziala jak nalezy
+STOP
