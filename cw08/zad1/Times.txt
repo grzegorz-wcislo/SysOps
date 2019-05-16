@@ -1,0 +1,66 @@
+===
+=== block ===
+==
+== 1 threads ==
+thread 1:	674305us
+total time:	674499us
+sum time:	674305us
+==
+== 2 threads ==
+thread 1:	424806us
+thread 2:	426422us
+total time:	426439us
+sum time:	851228us
+==
+== 4 threads ==
+thread 1:	422094us
+thread 2:	425200us
+thread 3:	424201us
+thread 4:	424812us
+total time:	426229us
+sum time:	1696307us
+==
+== 8 threads ==
+thread 1:	286280us
+thread 2:	424393us
+thread 3:	414956us
+thread 4:	419252us
+thread 5:	391323us
+thread 6:	411535us
+thread 7:	416525us
+thread 8:	413173us
+total time:	428347us
+sum time:	3177437us
+===
+=== interleaved ===
+==
+== 1 threads ==
+thread 1:	684509us
+total time:	684718us
+sum time:	684509us
+==
+== 2 threads ==
+thread 1:	433329us
+thread 2:	433530us
+total time:	433568us
+sum time:	866859us
+==
+== 4 threads ==
+thread 1:	429529us
+thread 2:	428629us
+thread 3:	428589us
+thread 4:	429579us
+total time:	429663us
+sum time:	1716326us
+==
+== 8 threads ==
+thread 1:	302569us
+thread 2:	422589us
+thread 3:	380092us
+thread 4:	395281us
+thread 5:	416131us
+thread 6:	406178us
+thread 7:	412485us
+thread 8:	416869us
+total time:	427694us
+sum time:	3152194us
